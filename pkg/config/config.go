@@ -10,6 +10,7 @@ import (
 )
 
 type Config struct {
+	GoVersion string `yaml:"goVersion"`
 	Type      string `yaml:"type"`
 	AppRoot   string `yaml:"appRoot"`
 	Resources []struct {
