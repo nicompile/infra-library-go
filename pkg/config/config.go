@@ -10,18 +10,11 @@ import (
 )
 
 type Config struct {
-	GoVersion string `yaml:"goVersion"`
+	Name      string `yaml:"name"`
 	Type      string `yaml:"type"`
+	GoVersion string `yaml:"goVersion"`
 	AppRoot   string `yaml:"appRoot"`
-	Resources []struct {
-		Method string `yaml:"method"`
-		Path   string `yaml:"path"`
-		Target string `yaml:"target"`
-	} `yaml:"resources"`
-	Timeout struct {
-		Minutes int `yaml:"minutes"`
-		Seconds int `yaml:"seconds"`
-	} `yaml:"timeout"`
+	Target    string `yaml:"target"`
 }
 
 func GetAll(dir string) ([]Config, error) {
