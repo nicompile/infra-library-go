@@ -4,10 +4,12 @@ type Endpoint struct {
 	Method  string
 	Path    string
 	Target  func(Request) Response
-	Timeout struct {
-		Minutes int
-		Seconds int
-	}
+	Timeout Timeout
+}
+
+type Timeout struct {
+	Minutes int
+	Seconds int
 }
 
 type Request struct {
