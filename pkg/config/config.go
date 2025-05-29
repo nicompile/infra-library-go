@@ -10,6 +10,7 @@ import (
 )
 
 type Config struct {
+	Uid       string `yaml:"uid"`
 	GoVersion string `yaml:"goVersion"`
 	Type      string `yaml:"type"`
 	Target    string `yaml:"target"`
