@@ -1,22 +1,10 @@
-package serverlessapi
+package serverlessfunction
 
 import (
 	"context"
 
 	"github.com/aws/aws-lambda-go/events"
 )
-
-type Endpoint struct {
-	Method  string
-	Path    string
-	Target  func(Request) Response
-	Timeout Timeout
-}
-
-type Timeout struct {
-	Minutes int
-	Seconds int
-}
 
 type Request struct {
 	Headers                         map[string]string
@@ -34,10 +22,10 @@ type Response struct {
 	Body              string              `json:"body"`
 }
 
-func BuildHandler(endpointMethod func(Request) Response) func(context.Context, events.APIGatewayProxyRequest) events.APIGatewayProxyResponse {
+func BuildLambdaHandler(function func(Request) Response) func(context.Context, events.APIGatewayProxyRequest) events.APIGatewayProxyResponse {
 	return func(ctx context.Context, event events.APIGatewayProxyRequest) events.APIGatewayProxyResponse {
 		req := requestFromAwsModel(event)
-		resp := endpointMethod(req)
+		resp := function(req)
 		return resp.toAwsModel()
 	}
 }

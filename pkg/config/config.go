@@ -10,11 +10,12 @@ import (
 )
 
 type Config struct {
-	Name      string `yaml:"name"`
-	Type      string `yaml:"type"`
 	GoVersion string `yaml:"goVersion"`
-	AppRoot   string `yaml:"appRoot"`
+	Type      string `yaml:"type"`
 	Target    string `yaml:"target"`
+	ApiRoot   string `yaml:"apiRoot"`
+	Method    string `yaml:"method"`
+	Path      string `yaml:"path"`
 }
 
 func GetAll(dir string) ([]Config, error) {
