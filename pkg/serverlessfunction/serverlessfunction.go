@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
 type Request struct {
@@ -22,12 +23,12 @@ type Response struct {
 	Body              string              `json:"body"`
 }
 
-func BuildLambdaHandler(function func(Request) Response) func(context.Context, events.APIGatewayProxyRequest) events.APIGatewayProxyResponse {
-	return func(ctx context.Context, event events.APIGatewayProxyRequest) events.APIGatewayProxyResponse {
+func StartLambda(function func(Request) Response) {
+	lambda.Start(func(ctx context.Context, event events.APIGatewayProxyRequest) events.APIGatewayProxyResponse {
 		req := requestFromAwsModel(event)
 		resp := function(req)
 		return resp.toAwsModel()
-	}
+	})
 }
 
 func requestFromAwsModel(event events.APIGatewayProxyRequest) Request {
